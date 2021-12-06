@@ -4,7 +4,6 @@ from food import Food
 from scoreboard import Scoreboard
 import time
 
-
 screen = Screen()
 screen.setup(height=600, width=600)
 screen.bgcolor("black")
@@ -25,14 +24,17 @@ screen.onkey(key="Down", fun=snake.down)
 screen.onkey(key="Left", fun=snake.left)
 screen.onkey(key="Right", fun=snake.right)
 
+
 def game_over():
     scoreboard.game_over()
     food.game_over()
+
 
 variable1 = -260
 variable2 = 260
 variable3 = -260
 variable4 = 260
+
 
 while game_is_on:
     
