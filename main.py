@@ -29,7 +29,10 @@ def game_over():
     scoreboard.game_over()
     food.game_over()
 
-
+variable1 = -280
+variable2 = 280
+variable3 = -280
+variable4 = 280
 
 while game_is_on:
     
@@ -46,9 +49,28 @@ while game_is_on:
         
 
     # Detect collision with wall.
-    if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
-        game_is_on = False
-        game_over()
+    if snake.head.xcor() > 280:
+        for segment in snake.segments:
+            variable1 -= 20
+            segment.goto(variable1, 0)
+        variable1 = -280
+    elif snake.head.xcor() < -280:
+        for segment in snake.segments:
+            variable2 +=20
+            segment.goto(variable2, 0)
+        variable2 = 280
+    elif snake.head.ycor() > 280:
+        for segment in snake.segments:
+            variable3 -= 20
+            segment.goto(0, variable3)
+        variable3 = -280
+    elif snake.head.ycor() < -280:
+        for segment in snake.segments:
+            variable4 += 20
+            segment.goto(0, variable4)
+        variable4 = 280
+    
+    
         
 
     # Detect collisions with tail.
