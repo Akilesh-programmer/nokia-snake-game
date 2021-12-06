@@ -51,9 +51,7 @@ class Snake:
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
 
-    def game_over(self):
-        for segment in self.segments:
-            segment.color("black")
+    
 
     
 

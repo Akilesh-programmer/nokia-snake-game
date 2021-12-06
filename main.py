@@ -28,7 +28,8 @@ screen.onkey(key="Right", fun=snake.right)
 def game_over():
     scoreboard.game_over()
     food.game_over()
-    snake.game_over()
+
+sleep =  0.1
 
 while game_is_on:
     
@@ -42,6 +43,7 @@ while game_is_on:
         food.refresh()
         snake.extend()
         scoreboard.increase_score()
+        sleep -= 0.01
 
     # Detect collision with wall.
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 280 or snake.head.ycor() < -280:
@@ -60,7 +62,7 @@ while game_is_on:
     
 
     screen.update()
-    time.sleep(0.1)
+    time.sleep(sleep)
 
     
 
