@@ -26,9 +26,11 @@ screen.onkey(key="Right", fun=snake.right)
 
 
 def game_over():
+    global snake
     scoreboard.game_over()
-    food.game_over()
-
+    scoreboard.reset()
+    snake = Snake()
+    
 
 variable1 = -260
 variable2 = 260
@@ -37,7 +39,13 @@ variable4 = 260
 
 
 while game_is_on:
-    
+    screen.listen()
+    screen.onkey(key="Up", fun=snake.up)
+    screen.onkey(key="Down", fun=snake.down)
+    screen.onkey(key="Left", fun=snake.left)
+    screen.onkey(key="Right", fun=snake.right)
+    screen.update()
+    time.sleep(0.1)
 
     snake.move()
     
@@ -78,13 +86,28 @@ while game_is_on:
     # Detect collisions with tail.
     for segment in snake.segments[1:]:
         if snake.head.distance(segment) < 10:
-            game_is_on = False
+            
+            for segment in snake.segments:
+                segment.goto(-1000, 1000)
+                segment.clear()
+            snake.head.clear()
+            snake = 0
             game_over()
+            scoreboard.score = 0
+            scoreboard.update_scoreboard()
     # If head collides with any segment in the tail.
     
+    if scoreboard.score > scoreboard.high_score:
+        scoreboard.high_score = scoreboard.score
+        scoreboard.clear()
+        scoreboard.update_scoreboard()
+        screen.update()
 
-    screen.update()
-    time.sleep(0.1)
+    screen.listen()
+    screen.onkey(key="Up", fun=snake.up)
+    screen.onkey(key="Down", fun=snake.down)
+    screen.onkey(key="Left", fun=snake.left)
+    screen.onkey(key="Right", fun=snake.right)
 
     
 
